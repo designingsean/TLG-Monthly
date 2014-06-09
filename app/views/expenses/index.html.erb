@@ -1,0 +1,100 @@
+<% var = 'total' %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-9">
+      <div id="monthly"></div>
+    </div>
+    <div class="col-sm-3">
+      <div id="total"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12"></div>
+  </div>
+</div>
+<script>
+$(function () {
+  $('#monthly').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Monthly <%= var.capitalize %> Expenses'
+    },
+    xAxis: {
+      categories: [
+        <% @expenses.select(:month).distinct.each do |expense| %>
+          '<%= Date::MONTHNAMES[expense.month] %>',
+        <% end %>
+      ]
+    },
+    yAxis: {
+      title: {
+        text: 'Expenses'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        return '<b>'+ this.series.name +'</b><br/>'+
+        this.x +': '+ this.y;
+      }
+    },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <% @expenses.year(year.year).each do |expense| %>
+              <%= expense[var] %>,
+            <% end %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+  $('#total').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Annual <%= var.capitalize %> Expenses'
+    },
+    xAxis: {
+      categories: [
+        'Annual'
+      ]
+    },
+    yAxis: {
+      title: {
+        text: 'Expenses'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+      formatter: function() {
+        return '<b>'+ this.series.name +'</b><br/>'+
+        this.x +': '+ this.y;
+      }
+    },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <%= @expenses.year(year.year).sum(var) %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+});
+</script>
