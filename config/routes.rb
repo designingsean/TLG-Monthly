@@ -7,4 +7,8 @@ Rails.application.routes.draw do
     collection do
     end
   end
+  resources :net do
+    collection do
+    end
+  end
 end
