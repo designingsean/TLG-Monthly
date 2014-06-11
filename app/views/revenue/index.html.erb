@@ -1,5 +1,23 @@
-<% var = 'total' %>
+<% var = params[:category] || 'total' %>
 <div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group">
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <%= var.capitalize %> <span class="caret"></span>
+            </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="revenue">Total</a></li>
+          <% @revenues.column_names.each do |name| %>
+            <% unless ['id', 'year', 'month', 'total'].include?(name) %>
+              <li><a href="?category=<%= name %>"><%= name.capitalize %></a></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-sm-9">
       <div id="monthly"></div>
