@@ -8,6 +8,7 @@ class Expenses < ActiveRecord::Base
     self.table_name = "v_expenses"
     self.primary_key = "id"
     belongs_to :expense, foreign_key: "id"
+    default_scope { order('year ASC, month ASC') }
 
     def self.year(year)
       self.where(year: year)
