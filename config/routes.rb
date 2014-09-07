@@ -11,4 +11,8 @@ Rails.application.routes.draw do
     collection do
     end
   end
+  resources :enrollments do
+    collection do
+    end
+  end
 end
