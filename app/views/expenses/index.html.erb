@@ -19,16 +19,22 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-9">
+    <div class="col-sm-12">
       <div id="monthly"></div>
     </div>
-    <div class="col-sm-3">
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
       <div id="total"></div>
+    </div>
+    <div class="col-sm-6">
+      <div id="average"></div>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-12"></div>
   </div>
+</div>
 </div>
 <script>
 $(function () {
@@ -57,11 +63,13 @@ $(function () {
       }
     },
     tooltip: {
-      formatter: function() {
-        return '<b>'+ this.series.name +'</b><br/>'+
-        this.x +': '+ this.y;
-      }
-    },
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
     series: [
       <% @years.each do |year| %>
         {
@@ -98,17 +106,60 @@ $(function () {
       }
     },
     tooltip: {
-      formatter: function() {
-        return '<b>'+ this.series.name +'</b><br/>'+
-        this.x +': '+ this.y;
-      }
-    },
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
     series: [
       <% @years.each do |year| %>
         {
           name: <%= year.year %>,
           data: [
             <%= @expenses.year(year.year).sum(var) %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+  $('#average').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Average <%= var.capitalize %> Expenses'
+    },
+    xAxis: {
+      categories: [
+        'Annual'
+      ]
+    },
+    yAxis: {
+      title: {
+        text: 'Expenses'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <%= @expenses.year(year.year).average(var) %>
           ]
       },
       <% end %>
