@@ -1,14 +1,14 @@
 class Expenses < ActiveRecord::Base
 
   def self.years
-    self.select(:year).distinct
+    self.select(:year).distinct.order('year ASC')
   end
 
   class Totals < ActiveRecord::Base
     self.table_name = "v_expenses"
     self.primary_key = "id"
     belongs_to :expense, foreign_key: "id"
-    default_scope { order('year ASC, month ASC') }
+    default_scope { order('month ASC') }
 
     def self.year(year)
       self.where(year: year)
