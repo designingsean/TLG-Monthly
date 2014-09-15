@@ -56,7 +56,7 @@ $(function () {
           name: <%= year.year %>,
           data: [
             <% @revenues.year(year.year).each_with_index do |revenue, i| %>
-              <%= revenue.total-@expenses[i].total %>,
+              <%= revenue.total - @expenses.year(year.year)[i].total %>,
             <% end %>
           ]
       },
@@ -109,7 +109,7 @@ $(function () {
       type: 'column'
     },
     title: {
-      text: 'Average Annual Net Income'
+      text: 'Average Monthly Net Income'
     },
     xAxis: {
       categories: [
