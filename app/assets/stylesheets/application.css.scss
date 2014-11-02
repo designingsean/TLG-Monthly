@@ -25,6 +25,57 @@
     @include span-columns(6);
   }
 }
+
+//navigation
+header {
+  $navigation-padding: 1em;
+  $navigation-background: $dark-gray;
+  $navigation-color: transparentize(white, 0.3);
+  $navigation-color-hover: white;
+  $navigation-height: 60px;
+  $navigation-active-link-color: transparentize(white, 0.5);
+
+  background-color: $navigation-background;
+  border-bottom: 1px solid darken($navigation-background, 10);
+  height: $navigation-height;
+
+  .nav-header {
+    color: $navigation-color;
+    display: inline-block;
+    font-weight: 800;
+    font-size: 1.2em;
+    line-height: $navigation-height;
+    margin-right: 2em;
+  }
+
+  ul {
+    -webkit-transform-style: preserve-3d; // stop webkit flicker
+    clear: both;
+    display: inline;
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline;
+      line-height: $navigation-height;
+      overflow: hidden;
+      padding-right: .8em;
+      text-decoration: none;
+
+      a {
+        color: $navigation-color;
+        display: inline-block;
+        font-weight: 400;
+        padding-right: 1em;
+
+        &:hover {
+          color: $navigation-color-hover;
+        }
+      }
+    }
+  }
+}
+
 //drop down
 $dropdown-color: $base-font-color;
 $dropdown-description-color: lighten($dropdown-color, 40);
