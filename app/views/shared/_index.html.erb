@@ -1,0 +1,151 @@
+<% var = params[:category] || 'total' %>
+<div class="container">
+  <div class="dropdown">
+    <div class="dropdown-container">
+      <p class="dropdown-description"><%= title %></p>
+      <p class="dropdown-button"><%= var.capitalize %></p>
+      <ul class="menu">
+        <li><a href="revenue">Total</a></li>
+        <% data.column_names.each do |name| %>
+          <% unless ['id', 'year', 'month', 'total'].include?(name) %>
+            <li><a href="?category=<%= name %>"><%= name.capitalize %></a></li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div id="monthly"></div>
+  <div id="annual"></div>
+  <div id="average"></div>
+</div>
+<script>
+$(function () {
+  $('#monthly').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Monthly'
+    },
+    xAxis: {
+      categories: [
+        <% data.select(:month).distinct.each do |revenue| %>
+          '<%= Date::MONTHNAMES[revenue.month] %>',
+        <% end %>
+      ]
+    },
+    yAxis: {
+      title: {
+        text: '<%= title %>'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <% data.year(year.year).each do |revenue| %>
+              <%= revenue[var] %>,
+            <% end %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+  $('#annual').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Annual'
+    },
+    xAxis: {
+      categories: [
+        'Annual'
+      ]
+    },
+    yAxis: {
+      title: {
+        text: '<%= title %>'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <%= data.year(year.year).sum(var) %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+  $('#average').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Average'
+    },
+    xAxis: {
+      categories: [
+        'Annual'
+      ]
+    },
+    yAxis: {
+      title: {
+        text: '<%= title %>'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <%= data.year(year.year).average(var) %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+});
+</script>
