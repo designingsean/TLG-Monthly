@@ -11,6 +11,5 @@
 // about supported directives.
 //
 //= require jquery
-//= require bootstrap
 //= require highcharts
 //= require_tree .
