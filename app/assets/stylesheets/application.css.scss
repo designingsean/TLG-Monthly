@@ -66,10 +66,14 @@ header {
         color: $navigation-color;
         display: inline-block;
         font-weight: 400;
-        padding-right: 1em;
+        padding: 0 $navigation-padding/2;
 
         &:hover {
           color: $navigation-color-hover;
+        }
+        &.active {
+          background-color: lighten($navigation-background, 25);
+          color: white;
         }
       }
     }
