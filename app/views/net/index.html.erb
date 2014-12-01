@@ -1,20 +1,7 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-sm-12">
-      <div id="monthly"></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <div id="total"></div>
-    </div>
-    <div class="col-sm-6">
-      <div id="average"></div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12"></div>
-  </div>
+<div class="container">
+  <div id="monthly"></div>
+  <div id="annual"></div>
+  <div id="average"></div>
 </div>
 <script>
 $(function () {
@@ -23,7 +10,7 @@ $(function () {
       type: 'column'
     },
     title: {
-      text: 'Monthly Net Income'
+      text: 'Monthly'
     },
     xAxis: {
       categories: [
@@ -63,12 +50,12 @@ $(function () {
       <% end %>
     ]
   });
-  $('#total').highcharts({
+  $('#annual').highcharts({
     chart: {
       type: 'column'
     },
     title: {
-      text: 'Annual Net Income'
+      text: 'Annual'
     },
     xAxis: {
       categories: [
@@ -109,7 +96,7 @@ $(function () {
       type: 'column'
     },
     title: {
-      text: 'Average Monthly Net Income'
+      text: 'Average'
     },
     xAxis: {
       categories: [
