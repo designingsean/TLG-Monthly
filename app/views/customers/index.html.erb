@@ -1,0 +1,136 @@
+<div class="container">
+  <div id="monthly"></div>
+  <div id="annual"></div>
+  <div id="average"></div>
+</div>
+<script>
+$(function () {
+  $('#monthly').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Monthly'
+    },
+    xAxis: {
+      categories: [
+        <% @revenues.select(:month).distinct.each do |revenue| %>
+          '<%= Date::MONTHNAMES[revenue.month] %>',
+        <% end %>
+      ]
+    },
+    yAxis: {
+      title: {
+        text: 'Net Income'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <% @revenues.year(year.year).each_with_index do |revenue, i| %>
+              <%= revenue.total / @enrollments.year(year.year)[i].total %>,
+            <% end %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+  $('#annual').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Annual'
+    },
+    xAxis: {
+      categories: [
+        'Annual'
+      ]
+    },
+    yAxis: {
+      title: {
+        text: 'Net Income'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <%= @revenues.year(year.year).sum(:total) / @enrollments.year(year.year).average(:total) %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+  $('#average').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Average'
+    },
+    xAxis: {
+      categories: [
+        'Annual'
+      ]
+    },
+    yAxis: {
+      title: {
+        text: 'Average Net Income'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <%= @revenues.year(year.year).average(:total) / @enrollments.year(year.year).average(:total) %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+});
+</script>

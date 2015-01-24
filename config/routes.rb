@@ -15,4 +15,13 @@ Rails.application.routes.draw do
     collection do
     end
   end
+  resources :customers do
+    collection do
+    end
+  end
+  #for testing hireology widget
+  resources :test do
+    collection do
+    end
+  end
 end
