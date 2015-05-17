@@ -8,7 +8,7 @@ gem 'neat'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'wiselinks'
-gem 'highcharts-rails', '~> 4.0.1'
+gem 'highcharts-rails', '~> 4.0.4'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
