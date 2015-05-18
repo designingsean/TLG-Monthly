@@ -1,0 +1,27 @@
+<h1><%= Date::MONTHNAMES[@start_month] %> <%= @start_year %> to <%= Date::MONTHNAMES[@end_month] %> <%= @end_year %> - <%= @plan %></h1>
+<table>
+  <thead>
+    <tr>
+      <th>Previous</th>
+      <th>Adds</th>
+      <th>Drops</th>
+      <th>Current</th>
+      <th>Churn</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @start_enroll %></td>
+      <td><%= @adds.count %></td>
+      <td><%= @drops.count %></td>
+      <td><%= @end_enroll %></td>
+      <td><%= number_to_percentage(((@start_enroll-@drops.count.to_f)/@start_enroll)*100, precision: 1) %></td>
+    </tr>
+  </tbody>
+</table>
+<h2>Drop Info</h2>
+<ol>
+<% @drops.each do |drop| %>
+  <li><%= drop[:student] %> - <%= drop[:class] %></li>
+<% end %>
+</ol>
