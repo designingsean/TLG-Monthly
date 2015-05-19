@@ -12,10 +12,10 @@
   <nav>
     <p class="nav-header">TLG West Ashley</p>
     <ul>
-      <li <%= active_page("revenue") %>><%= link_to "Revenue", revenue_index_path %></li>
-      <li <%= active_page("expenses") %>><%= link_to "Expenses", expenses_path %></li>
-      <li <%= active_page("net") %>><%= link_to "Net", net_index_path %></li>
-      <li <%= active_page("enrollments") %>><%= link_to "Enrollments", enrollments_path %></li>
+      <li <%= active_page("revenue") %>><%= link_to "Revenue", relative_url + revenue_index_path %></li>
+      <li <%= active_page("expenses") %>><%= link_to "Expenses", relative_url + expenses_path %></li>
+      <li <%= active_page("net") %>><%= link_to "Net", relative_url + net_index_path %></li>
+      <li <%= active_page("enrollments") %>><%= link_to "Enrollments", relative_url + enrollments_path %></li>
     </ul>
   </nav>
 </header>
