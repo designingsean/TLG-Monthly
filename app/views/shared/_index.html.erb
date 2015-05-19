@@ -17,9 +17,6 @@
   <% if monthly %>
     <div id="monthly"></div>
   <% end %>
-  <% if percentage %>
-    <div id="percentage"></div>
-  <% end %>
   <% if annual %>
     <div id="annual"></div>
   <% end %>
@@ -68,51 +65,6 @@ $(function () {
           data: [
             <% data.year(year.year).each do |revenue| %>
               <%= revenue[var] %>,
-            <% end %>
-          ]
-      },
-      <% end %>
-    ]
-  });
-  $('#percentage').highcharts({
-    chart: {
-      type: 'column'
-    },
-    title: {
-      text: 'Percentage'
-    },
-    xAxis: {
-      categories: [
-        <% data.select(:month).distinct.each do |revenue| %>
-          '<%= Date::MONTHNAMES[revenue.month] %>',
-        <% end %>
-      ]
-    },
-    yAxis: {
-      title: {
-        text: '<%= title %>'
-      },
-      labels: {
-        formatter: function() {
-          return this.value;
-        }
-      }
-    },
-    tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
-                footerFormat: '</table>',
-                shared: true,
-                useHTML: true
-            },
-    series: [
-      <% @years.each do |year| %>
-        {
-          name: <%= year.year %>,
-          data: [
-            <% data.year(year.year).each do |revenue| %>
-              <%= (revenue[var] / data.year(year.year).sum(var)) * 100 %>,
             <% end %>
           ]
       },
