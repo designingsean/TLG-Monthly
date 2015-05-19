@@ -82,5 +82,5 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # relative root
-  config.action_controller.relative_url_root = "/monthly"
+  config.relative_url_root = "/monthly"
 end
