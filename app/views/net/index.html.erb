@@ -42,8 +42,8 @@ $(function () {
         {
           name: <%= year.year %>,
           data: [
-            <% @revenues.year(year.year).each_with_index do |revenue, i| %>
-              <%= revenue.total - @expenses.year(year.year)[i].total %>,
+            <% @expenses.year(year.year).each_with_index do |expense, i| %>
+              <%= @revenues.year(year.year)[i].total - expense.total %>,
             <% end %>
           ]
       },
