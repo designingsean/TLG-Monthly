@@ -71,10 +71,10 @@ header {
         &:hover {
           color: $navigation-color-hover;
         }
-        &.active {
-          background-color: lighten($navigation-background, 25);
-          color: white;
-        }
+      }
+      &.active a {
+        background-color: lighten($navigation-background, 25);
+        color: white;
       }
     }
   }
@@ -205,4 +205,8 @@ $dropdown-arrow-top-distance: 0;
 
 .show-menu {
   display: block;
+}
+
+.olddesign .linksHolder a {
+  color: #f00 !important;
 }
