@@ -7,19 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<header>
-  <nav>
-    <p class="nav-header">TLG West Ashley</p>
-    <ul>
-      <li <%= active_page("revenue") %>><%= link_to "Revenue", relative_url + revenue_index_path %></li>
-      <li <%= active_page("expenses") %>><%= link_to "Expenses", relative_url + expenses_path %></li>
-      <li <%= active_page("net") %>><%= link_to "Net", relative_url + net_index_path %></li>
-      <li <%= active_page("enrollments") %>><%= link_to "Enrollments", relative_url + enrollments_path %></li>
-    </ul>
-  </nav>
-</header>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <span class="navbar-brand">TLG West Ashley</span>
+      <ul class="nav navbar-nav">
+        <li <%= active_page("revenue") %>><%= link_to "Revenue", relative_url + revenue_index_path %></li>
+        <li <%= active_page("expenses") %>><%= link_to "Expenses", relative_url + expenses_path %></li>
+        <li <%= active_page("net") %>><%= link_to "Net", relative_url + net_index_path %></li>
+        <li <%= active_page("enrollments") %>><%= link_to "Enrollments", relative_url + enrollments_path %></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 <%= yield %>
-
 </body>
 </html>

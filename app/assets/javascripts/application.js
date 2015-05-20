@@ -11,16 +11,6 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
 //= require highcharts
 //= require_tree .
-
-$(document).ready(function(){
-  //dropdown functionality
-  $(".dropdown-button").click(function(){
-    $(".menu").toggleClass("show-menu");
-    $(".menu > li").click(function(){
-      $(".dropdown-button").html($(this).html());
-      $(".menu").removeClass("show-menu");
-    });
-  });
-});

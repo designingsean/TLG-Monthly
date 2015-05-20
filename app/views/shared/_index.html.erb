@@ -1,18 +1,17 @@
 <% var = params[:category] || 'total' %>
 <div class="container">
-  <div class="dropdown">
-    <div class="dropdown-container">
-      <p class="dropdown-description"><%= title %></p>
-      <p class="dropdown-button"><%= var.capitalize %></p>
-      <ul class="menu">
-        <li><a href="revenue">Total</a></li>
-        <% data.column_names.each do |name| %>
-          <% unless ['id', 'year', 'month', 'total'].include?(name) %>
-            <li><a href="?category=<%= name %>"><%= name.capitalize %></a></li>
-          <% end %>
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+      <%= var.capitalize %> <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+      <li><a href="revenue">Total</a></li>
+      <% data.column_names.each do |name| %>
+        <% unless ['id', 'year', 'month', 'total'].include?(name) %>
+          <li><a href="?category=<%= name %>"><%= name.capitalize %></a></li>
         <% end %>
-      </ul>
-    </div>
+      <% end %>
+    </ul>
   </div>
   <% if monthly %>
     <div id="monthly"></div>
