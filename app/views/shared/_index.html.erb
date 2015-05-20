@@ -1,27 +1,35 @@
 <% var = params[:category] || 'total' %>
 <div class="container">
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-      <%= var.capitalize %> <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-      <li><a href="revenue">Total</a></li>
-      <% data.column_names.each do |name| %>
-        <% unless ['id', 'year', 'month', 'total'].include?(name) %>
-          <li><a href="?category=<%= name %>"><%= name.capitalize %></a></li>
-        <% end %>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+          <%= var.capitalize %> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="revenue">Total</a></li>
+          <% data.column_names.each do |name| %>
+            <% unless ['id', 'year', 'month', 'total'].include?(name) %>
+              <li><a href="?category=<%= name %>"><%= name.capitalize %></a></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+      <% if monthly %>
+        <div id="monthly"></div>
       <% end %>
-    </ul>
+    </div>
+      <% if annual %>
+      <div class="col-sm-6">
+        <div id="annual"></div>
+      </div>
+      <% end %>
+      <% if average %>
+      <div class="col-sm-6">
+        <div id="average"></div>
+      </div>
+      <% end %>
   </div>
-  <% if monthly %>
-    <div id="monthly"></div>
-  <% end %>
-  <% if annual %>
-    <div id="annual"></div>
-  <% end %>
-  <% if average %>
-    <div id="average"></div>
-  <% end %>
 </div>
 <script>
 $(function () {
