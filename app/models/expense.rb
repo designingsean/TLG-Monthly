@@ -1,4 +1,4 @@
-class Expenses < ActiveRecord::Base
+class Expense < ActiveRecord::Base
 
   def self.years
     self.select(:year).distinct.order('year ASC')

@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <%= form_for data do |f| %>
+      <% fields.each do |field| %>
+        <% unless ['id'].include?(field) %>
+          <div class="form-group col-sm-2">
+            <%= f.label(field) %>
+            <%= f.number_field(field, :class => 'form-control') %>
+          </div>
+        <% end %>
+      <% end %>
+      <div class="col-sm-12">
+        <%= f.submit("Add", :class => 'btn btn-primary') %>
+      </div>
+    <% end %>
+  </div>
+</div>

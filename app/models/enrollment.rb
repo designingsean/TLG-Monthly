@@ -1,4 +1,4 @@
-class Enrollments < ActiveRecord::Base
+class Enrollment < ActiveRecord::Base
 
   def self.years
     self.select(:year).distinct.order('year ASC')

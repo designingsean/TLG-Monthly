@@ -1,7 +1,7 @@
 class NetController < ApplicationController
   def index
-    @years = Expenses.years
+    @years = Expense.years
     @revenues = Revenue::Totals.all
-    @expenses = Expenses::Totals.all
+    @expenses = Expense::Totals.all
   end
 end

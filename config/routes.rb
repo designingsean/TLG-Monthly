@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :revenue do
+  resources :revenues do
     collection do
     end
   end
@@ -28,5 +28,5 @@ Rails.application.routes.draw do
     collection do
     end
   end
-  root :to => "revenue#index"
+  root :to => "revenues#index"
 end
