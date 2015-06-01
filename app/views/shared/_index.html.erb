@@ -18,6 +18,9 @@
       <% if monthly %>
         <div id="monthly"></div>
       <% end %>
+      <% if ongoing %>
+        <div id="ongoing"></div>
+      <% end %>
     </div>
       <% if annual %>
       <div class="col-sm-6">
@@ -76,6 +79,42 @@ $(function () {
           ]
       },
       <% end %>
+    ]
+  });
+  $('#ongoing').highcharts({
+    title: {
+      text: '<%= var.capitalize %> <%= title %> Over Time'
+    },
+    xAxis: {
+      categories: [
+        <% data.each do |revenue| %>
+          '<%= revenue.year %> <%= Date::ABBR_MONTHNAMES[revenue.month] %>',
+        <% end %>
+      ],
+      labels: {
+        staggerLines: 2,
+        step: 2
+      }
+    },
+    yAxis: {
+      title: {
+        text: '<%= title %>'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    series: [
+        {
+          name: 'Totals',
+          data: [
+            <% data.each do |revenue| %>
+              <%= revenue[var] %>,
+            <% end %>
+          ]
+      },
     ]
   });
   $('#annual').highcharts({
