@@ -7,7 +7,7 @@
           <%= var.capitalize %> <span class="caret"></span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li><a href="revenue">Total</a></li>
+          <li><%= link_to "Totals", params[:controller] %></li>
           <% data.column_names.each do |name| %>
             <% unless ['id', 'year', 'month', 'total'].include?(name) %>
               <li><a href="?category=<%= name %>"><%= name.capitalize %></a></li>
