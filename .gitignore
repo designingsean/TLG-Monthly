@@ -17,3 +17,6 @@
 
 Gemfile.lock
 config/database.yml
+
+app/controllers/test*
+app/views/test*
