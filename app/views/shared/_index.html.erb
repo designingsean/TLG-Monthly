@@ -45,8 +45,8 @@ $(function () {
     },
     xAxis: {
       categories: [
-        <% data.select(:month).distinct.each do |revenue| %>
-          '<%= Date::MONTHNAMES[revenue.month] %>',
+        <% for i in 1..12 %>
+          '<%= Date::MONTHNAMES[i] %>',
         <% end %>
       ]
     },
