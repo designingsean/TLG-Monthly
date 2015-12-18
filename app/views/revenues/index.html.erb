@@ -1,1 +1,16 @@
-<%= render :partial => "shared/index", :locals => { :title => "Revenue", :data => @revenues, :monthly => true, :ongoing => true, :annual => true, :average => true } %>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <%= render :partial => "shared/dropdown", :locals => { :title => "Revenue", :data => @revenues } %>
+      <%= render :partial => "shared/monthly", :locals => { :title => "Revenue", :data => @revenues } %>
+      <%= render :partial => "shared/ongoing", :locals => { :title => "Revenue", :data => @revenues } %>
+    </div>
+      <div class="col-sm-6">
+        <%= render :partial => "shared/annual", :locals => { :title => "Revenue", :data => @revenues } %>
+      </div>
+      <div class="col-sm-6">
+        <%= render :partial => "shared/average", :locals => { :title => "Revenue", :data => @revenues } %>
+      </div>
+  </div>
+</div>
+

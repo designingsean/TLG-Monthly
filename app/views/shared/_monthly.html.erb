@@ -1,0 +1,51 @@
+<% var = params[:category] || 'total' %>
+<div id="monthly"></div>
+<script>
+$(function () {
+  $('#monthly').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: '<%= var.capitalize %> Monthly <%= title %>'
+    },
+    xAxis: {
+      categories: [
+        <% for i in 1..12 %>
+          '<%= Date::MONTHNAMES[i] %>',
+        <% end %>
+      ]
+    },
+    yAxis: {
+      title: {
+        text: '<%= title %>'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <% data.year(year.year).each do |revenue| %>
+              <%= revenue[var] %>,
+            <% end %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+});
+</script>

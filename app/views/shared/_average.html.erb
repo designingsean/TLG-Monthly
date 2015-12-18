@@ -1,0 +1,47 @@
+<% var = params[:category] || 'total' %>
+<div id="average"></div>
+<script>
+$(function () {
+  $('#average').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: '<%= var.capitalize %> Average <%= title %>'
+    },
+    xAxis: {
+      categories: [
+        'Annual'
+      ]
+    },
+    yAxis: {
+      title: {
+        text: '<%= title %>'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <%= data.year(year.year).average(var) %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+});
+</script>

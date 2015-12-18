@@ -1,0 +1,42 @@
+<% var = params[:category] || 'total' %>
+<div id="ongoing"></div>
+<script>
+$(function () {
+  $('#ongoing').highcharts({
+    title: {
+      text: '<%= var.capitalize %> <%= title %> Over Time'
+    },
+    xAxis: {
+      categories: [
+        <% data.each do |revenue| %>
+          '<%= revenue.year %> <%= Date::ABBR_MONTHNAMES[revenue.month] %>',
+        <% end %>
+      ],
+      labels: {
+        staggerLines: 2,
+        step: 2
+      }
+    },
+    yAxis: {
+      title: {
+        text: '<%= title %>'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    series: [
+        {
+          name: 'Totals',
+          data: [
+            <% data.each do |revenue| %>
+              <%= revenue[var] %>,
+            <% end %>
+          ]
+      },
+    ]
+  });
+});
+</script>
