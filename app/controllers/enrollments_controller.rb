@@ -1,8 +1,8 @@
 class EnrollmentsController < ApplicationController
   def index
     @years = Enrollment.years
-    @enrollments = Enrollment::Totals.all
-    @revenues = Revenue::Totals.all
+    @enrollments = Enrollment::Totals.timeframe(params[:timeframe])
+    @revenues = Revenue::Totals.timeframe(params[:timeframe])
   end
 
   def new

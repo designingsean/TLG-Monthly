@@ -1,7 +1,7 @@
 class ExpensesController < ApplicationController
   def index
     @years = Expense.years
-    @expenses = Expense::Totals.all
+    @expenses = Expense::Totals.timeframe(params[:timeframe])
   end
 
   def new

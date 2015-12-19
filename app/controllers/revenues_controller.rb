@@ -1,7 +1,7 @@
 class RevenuesController < ApplicationController
   def index
     @years = Revenue.years
-    @revenues = Revenue::Totals.all
+    @revenues = Revenue::Totals.timeframe(params[:timeframe])
   end
 
   def new
