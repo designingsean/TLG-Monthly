@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <%= render :partial => "shared/dropdown", :locals => { :title => "Expenses", :data => @expenses } %>
+      <%= render :partial => "shared/category", :locals => { :title => "Expenses", :data => @expenses } %>
+      <%= render :partial => "shared/timeframe" %>
       <%= render :partial => "shared/monthly", :locals => { :title => "Expenses", :data => @expenses } %>
       <%= render :partial => "shared/ongoing", :locals => { :title => "Expenses", :data => @expenses } %>
     </div>
