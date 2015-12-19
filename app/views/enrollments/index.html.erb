@@ -4,18 +4,55 @@
       <%= render :partial => "shared/dropdown", :locals => { :title => "Enrollments", :data => @enrollments } %>
       <%= render :partial => "shared/monthly", :locals => { :title => "Enrollments", :data => @enrollments } %>
       <%= render :partial => "shared/ongoing", :locals => { :title => "Enrollments", :data => @enrollments } %>
+      <div id="monthlyrpe"></div>
     </div>
       <div class="col-sm-6">
         <%= render :partial => "shared/average", :locals => { :title => "Enrollments", :data => @enrollments } %>
       </div>
       <div class="col-sm-6">
-        <div id="revenueperenrollment"></div>
+        <div id="rpe"></div>
       </div>
   </div>
 </div>
 <script>
 $(function () {
-  $('#revenueperenrollment').highcharts({
+  $('#monthlyrpe').highcharts({
+    title: {
+      text: 'Monthly Revenue per Enrollment'
+    },
+    xAxis: {
+      categories: [
+        <% @enrollments.each do |enrollment| %>
+          '<%= enrollment.year %> <%= Date::ABBR_MONTHNAMES[enrollment.month] %>',
+        <% end %>
+      ],
+      labels: {
+        staggerLines: 2,
+        step: 2
+      }
+    },
+    yAxis: {
+      title: {
+        text: 'Revenue per Enrollment'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    series: [
+        {
+          name: 'Totals',
+          data: [
+            <% @enrollments.each_with_index do |enrollment, i| %>
+              <%= @revenues[i][params[:category] || :total]/enrollment[params[:category] || :total] %>,
+            <% end %>
+          ]
+      },
+    ]
+  });
+  $('#rpe').highcharts({
     chart: {
       type: 'column'
     },
