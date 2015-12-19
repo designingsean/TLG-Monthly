@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   resources :revenues do
     collection do
+      get '(/:category(/:timeframe))', :action => :index
     end
   end
   resources :expenses do
     collection do
+      get '(/:category(/:timeframe))', :action => :index
     end
   end
   resources :net do
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
   end
   resources :enrollments do
     collection do
+      get '(/:category(/:timeframe))', :action => :index
     end
   end
   resources :customers do

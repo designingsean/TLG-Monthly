@@ -4,10 +4,10 @@
     <%= var.capitalize %> <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu">
-    <li><%= link_to "Totals", params[:controller] %></li>
+    <li><%= link_to "Totals", :controller => params[:controller], :category => :total, :timeframe => params[:timeframe] %></li>
     <% data.column_names.each do |name| %>
       <% unless ['id', 'year', 'month', 'total'].include?(name) %>
-        <li><%= link_to name.capitalize, :controller => params[:controller], :category => name %></li>
+        <li><%= link_to name.capitalize, :controller => params[:controller], :category => name, :timeframe => params[:timeframe] %></li>
       <% end %>
     <% end %>
   </ul>
