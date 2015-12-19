@@ -18,28 +18,22 @@ class Revenue < ActiveRecord::Base
       self.where(month: month)
     end
 
-    def self.quarter(quarter)
+    def self.timeframe(quarter)
       case quarter
-        when 1
+        when "q1"
           months = [1,2,3]
-        when 2
+        when "q2"
           months = [4,5,6]
-        when 3
+        when "q3"
           months = [7,8,9]
-        when 4
+        when "q4"
           months = [10,11,12]
-      end
-      self.month(months)
-    end
-
-    def self.season(season)
-      case season
-        when 1
-          months = [1,2,3,4,5]
-        when 2
+        when "season"
+          months = [1,2,3,4,5,9,10,11,12]
+        when "summer"
           months = [6,7,8]
-        when 3
-          months = [9,10,11,12]
+        else
+          months = [1,2,3,4,5,6,7,8,9,10,11,12]
       end
       self.month(months)
     end
