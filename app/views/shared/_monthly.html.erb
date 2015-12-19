@@ -39,8 +39,8 @@ $(function () {
         {
           name: <%= year.year %>,
           data: [
-            <% data.year(year.year).each do |revenue| %>
-              <%= revenue[var] %>,
+            <% data.year(year.year).each do |d| %>
+              <%= d[var] %>,
             <% end %>
           ]
       },

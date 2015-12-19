@@ -8,8 +8,8 @@ $(function () {
     },
     xAxis: {
       categories: [
-        <% data.each do |revenue| %>
-          '<%= revenue.year %> <%= Date::ABBR_MONTHNAMES[revenue.month] %>',
+        <% data.each do |d| %>
+          '<%= d.year %> <%= Date::ABBR_MONTHNAMES[d.month] %>',
         <% end %>
       ],
       labels: {
@@ -31,8 +31,8 @@ $(function () {
         {
           name: 'Totals',
           data: [
-            <% data.each do |revenue| %>
-              <%= revenue[var] %>,
+            <% data.each do |d| %>
+              <%= d[var] %>,
             <% end %>
           ]
       },
