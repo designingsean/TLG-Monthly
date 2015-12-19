@@ -50,7 +50,7 @@ $(function () {
         {
           name: <%= year.year %>,
           data: [
-            <%= @revenues.year(year.year).sum(:total)/@enrollments.year(year.year).average(:total) %>
+            <%= @revenues.year(year.year).sum(params[:category] || :total)/@enrollments.year(year.year).average(params[:category] || :total) %>
           ]
       },
       <% end %>
