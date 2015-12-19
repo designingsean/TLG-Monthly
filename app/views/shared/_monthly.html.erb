@@ -11,8 +11,8 @@ $(function () {
     },
     xAxis: {
       categories: [
-        <% for i in 1..12 %>
-          '<%= Date::MONTHNAMES[i] %>',
+        <% data.each do |d| %>
+          '<%= Date::MONTHNAMES[d.month] %>',
         <% end %>
       ]
     },
