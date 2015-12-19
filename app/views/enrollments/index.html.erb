@@ -9,8 +9,52 @@
         <%= render :partial => "shared/average", :locals => { :title => "Enrollments", :data => @enrollments } %>
       </div>
       <div class="col-sm-6">
+        <div id="revenueperenrollment"></div>
       </div>
   </div>
 </div>
-
-
+<script>
+$(function () {
+  $('#revenueperenrollment').highcharts({
+    chart: {
+      type: 'column'
+    },
+    title: {
+      text: 'Revenue per Enrollment'
+    },
+    xAxis: {
+      categories: [
+        'Annual'
+      ]
+    },
+    yAxis: {
+      title: {
+        text: 'Revenue per Enrollment'
+      },
+      labels: {
+        formatter: function() {
+          return this.value;
+        }
+      }
+    },
+    tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+    series: [
+      <% @years.each do |year| %>
+        {
+          name: <%= year.year %>,
+          data: [
+            <%= @revenues.year(year.year).sum(:total)/@enrollments.year(year.year).average(:total) %>
+          ]
+      },
+      <% end %>
+    ]
+  });
+});
+</script>

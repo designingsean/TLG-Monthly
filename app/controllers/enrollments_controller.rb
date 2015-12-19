@@ -2,6 +2,7 @@ class EnrollmentsController < ApplicationController
   def index
     @years = Enrollment.years
     @enrollments = Enrollment::Totals.all
+    @revenues = Revenue::Totals.all
   end
 
   def new
