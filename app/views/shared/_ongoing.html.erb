@@ -12,6 +12,20 @@ $(function () {
           '<%= d.year %> <%= Date::ABBR_MONTHNAMES[d.month] %>',
         <% end %>
       ],
+      plotBands: [{
+        from: -0.5,
+        to: 8.5,
+        color: 'rgba(68, 170, 213, .2)'
+      },{
+        from: 16.5,
+        to: 39.5,
+        color: 'rgba(68, 170, 213, .2)'
+      },
+      {
+        from: 55.5,
+        to: 200,
+        color: 'rgba(68, 170, 213, .2)'
+      }],
       labels: {
         staggerLines: 2,
         step: 2
