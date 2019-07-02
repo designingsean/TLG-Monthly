@@ -28,10 +28,10 @@ class Expense < ActiveRecord::Base
           months = [7,8,9]
         when "q4"
           months = [10,11,12]
-        when "season"
-          months = [1,2,3,4,5,9,10,11,12]
-        when "summer"
-          months = [6,7,8]
+        when "h1"
+          months = [1,2,3,4,5,6]
+        when "h2"
+          months = [7,8,9,10,11,12]
         else
           months = [1,2,3,4,5,6,7,8,9,10,11,12]
       end
