@@ -1,6 +1,14 @@
 <% var = params[:category] || :total %>
 <div id="ongoing"></div>
 <script>
+var bands = [];
+for ( i=0; i<10; i++ ) {
+  bands[i] = {
+    color: 'rgba(68, 170, 213, .2)',
+    from: (4.5 + (i * 12)),
+    to: (7.5 + (i * 12))
+  }
+}
 $(function () {
   $('#ongoing').highcharts({
     title: {
@@ -12,10 +20,12 @@ $(function () {
           '<%= d.year %> <%= Date::ABBR_MONTHNAMES[d.month] %>',
         <% end %>
       ],
+      plotBands: bands,
       labels: {
-        staggerLines: 2,
-        step: 2
-      }
+        staggerLines: 1,
+        step: 6
+      },
+      type: 'datetime'
     },
     yAxis: {
       title: {

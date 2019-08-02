@@ -16,6 +16,14 @@
   </div>
 </div>
 <script>
+var bands = [];
+for ( i=0; i<10; i++ ) {
+  bands[i] = {
+    color: 'rgba(68, 170, 213, .2)',
+    from: (4.5 + (i * 12)),
+    to: (7.5 + (i * 12))
+  }
+}
 $(function () {
   $('#monthlyrpe').highcharts({
     title: {
@@ -27,20 +35,7 @@ $(function () {
           '<%= enrollment.year %> <%= Date::ABBR_MONTHNAMES[enrollment.month] %>',
         <% end %>
       ],
-      plotBands: [{
-        from: -0.5,
-        to: 8.5,
-        color: 'rgba(68, 170, 213, .2)'
-      },{
-        from: 16.5,
-        to: 39.5,
-        color: 'rgba(68, 170, 213, .2)'
-      },
-      {
-        from: 55.5,
-        to: 200,
-        color: 'rgba(68, 170, 213, .2)'
-      }],
+      plotBands: bands,
       labels: {
         staggerLines: 2,
         step: 2
